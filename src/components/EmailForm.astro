@@ -1,0 +1,43 @@
+<form action="" name="notify" class="flex flex-col md:flex-row max-w-[302px] md:max-w-[637px] gap-[10px] md:gap-[16px]">
+    <div class="">
+        <input type="text" name="email" id="email" placeholder="Your email address…" class="border border-[#C2D3FF] bg-white shadow-input rounded-[28px] py-[10px] md:py-[18px] pl-8 md:pl-[30px] text-xs md:text-base text-primary outline-accent text-light leading-5 placeholder:text-[#B8C7ED] w-full md:w-[421px] md:max-h-[56px]">
+        <p id="error" class="text-center md:text-start md:mt-[6px] md:ml-[30px] text-error text-[0.625rem] md:text-xs italic leading-5 tracking-[0.125px] md:tracking-[0.15px] mb-1 md:mb-0 hidden">Please provide a valid email address</p>
+    </div>
+    <button type="submit" class="bg-accent hover:bg-opacity-[0.796] focus:bg-opacity-[0.796] focus:outline-none transition duration-500 text-white text-xs md:text-base py-3 md:py-[18px] font-semibold leading-4 rounded-[28px] shadow-btn md:w-[200px] md:max-h-[56px]">Notify Me</button>
+</form>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form')
+
+        form?.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const email = document.querySelector('#email') as HTMLInputElement;
+            const error = document.getElementById('error') as HTMLElement;
+
+            function validateEmail(email : string) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+            
+            if(!email?.value.trim() || !validateEmail(email?.value.trim())){
+                error.style.display = 'block';
+                email.style.border = '1px solid #FF5466'
+            } else {
+                alert('Email Added Successfully!')
+                window.location.reload()
+            }
+
+            email.addEventListener('click', () => {
+                error.style.display = 'none';
+                email.style.border = '1px solid #C2D3FF'
+            } )
+
+            email.addEventListener('focus', () => {
+                error.style.display = 'none';
+                email.style.border = '1px solid #C2D3FF'
+            } )
+        })
+    })
+</script>
